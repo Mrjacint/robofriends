@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import CardList from "../components/CardList";
@@ -30,14 +30,15 @@ const App = (props) => {
   //   const [robots, setRobots] = useState([]);
   //const [searchField, setSerachfeald] = useState("");
 
+  const { onRequestRobot } = props;
   useEffect(() => {
     // fetch("https://jsonplaceholder.typicode.com/users")
     //   .then((response) => response.json())
     //   .then((users) => {
     //     setRobots(users);
     //   });
-    props.onRequestRobot();
-  }, []);
+    onRequestRobot();
+  }, [onRequestRobot]);
 
   //   const onSearchChange = (event) => {
   //     setSerachfeald(event.target.value);
