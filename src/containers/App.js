@@ -1,35 +1,57 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+
 import CardList from "../components/CardList";
 import SearchBox from "../components/SearchBox";
 import Scroll from "../components/Scroll";
 import ErrorBoundry from "../components/ErrorBoundry";
+import Header from "../components/Header";
 import "./App.css";
 
-const App = () => {
-  const [robots, setRobots] = useState([]);
-  const [searchfield, setSerachfeald] = useState("");
+import { setSearchField, requestRobots } from "../actions";
+
+const mapStateToProps = (state) => {
+  return {
+    searchField: state.searchRobots.searchField,
+    robots: state.requestRobots.robots,
+    isPending: state.requestRobots.isPending,
+    error: state.requestRobots.error,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+    onRequestRobot: () => dispatch(requestRobots()),
+  };
+};
+
+const App = (props) => {
+  //   const [robots, setRobots] = useState([]);
+  //const [searchField, setSerachfeald] = useState("");
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((users) => {
-        setRobots(users);
-      });
+    // fetch("https://jsonplaceholder.typicode.com/users")
+    //   .then((response) => response.json())
+    //   .then((users) => {
+    //     setRobots(users);
+    //   });
+    props.onRequestRobot();
   }, []);
 
-  const onSearchChange = (event) => {
-    setSerachfeald(event.target.value);
-  };
+  //   const onSearchChange = (event) => {
+  //     setSerachfeald(event.target.value);
+  //   };
 
-  const filteredRobots = robots.filter((robot) => {
-    return robot.name.toLowerCase().includes(searchfield.toLowerCase());
+  const filteredRobots = props.robots.filter((robot) => {
+    return robot.name.toLowerCase().includes(props.searchField.toLowerCase());
   });
-  return !robots.length ? (
+  return props.isPending ? (
     <h1>Loading</h1>
   ) : (
     <div className="tc">
-      <h1 className="f1">RoboFriends</h1>
-      <SearchBox searchChange={onSearchChange} />
+      <Header />
+      <SearchBox searchChange={props.onSearchChange} />
       <Scroll>
         <ErrorBoundry>
           <CardList robots={filteredRobots} />
@@ -39,4 +61,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
