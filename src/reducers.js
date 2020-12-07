@@ -25,7 +25,7 @@ const initialStateRobots = {
 };
 
 export const requestRobots = (state = initialStateRobots, action = {}) => {
-  console.log(state);
+  //console.log(state);
   switch (action.type) {
     case REQEST_ROBOTS_PENDING:
       return { ...state, isPending: true };
