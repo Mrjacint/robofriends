@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, combineReducers } from "redux";
-import { createLogger } from "redux-logger";
 import thunkMiddleware from "redux-thunk";
 import "tachyons";
 
@@ -13,13 +12,11 @@ import App from "./containers/App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 
-const logger = createLogger();
-
 const rootReducer = combineReducers({ searchRobots, requestRobots });
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(thunkMiddleware, logger)
+  applyMiddleware(thunkMiddleware)
 );
 
 ReactDOM.render(
@@ -29,7 +26,7 @@ ReactDOM.render(
     </Provider>
     ,{" "}
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById("root") as HTMLElement
 );
 
 // If you want your app to work offline and load faster, you can change

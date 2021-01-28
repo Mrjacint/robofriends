@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
 
-import CardList from "../components/CardList";
-import SearchBox from "../components/SearchBox";
-import Scroll from "../components/Scroll";
-import ErrorBoundry from "../components/ErrorBoundry";
-import Header from "../components/Header";
+import CardList from "./CardList";
+import SearchBox from "./SearchBox";
+import Scroll from "./Scroll";
+import ErrorBoundry from "./ErrorBoundry";
+import Header from "./Header";
 
 import "./MainPage.css";
+import { IRobot, ImainProps } from '../types'
 
-const MainPage = (props) => {
+
+
+const MainPage: React.FunctionComponent<ImainProps> = (props) => {
   const {
     onRequestRobot,
     robots,
@@ -17,11 +20,13 @@ const MainPage = (props) => {
     isPending,
   } = props;
 
+  console.log(props)
+
   useEffect(() => {
     onRequestRobot();
   }, [onRequestRobot]);
 
-  const filteredRobots = robots.filter((robot) => {
+  const filteredRobots: IRobot[] = robots.filter((robot: IRobot) => {
     return robot.name.toLowerCase().includes(searchField.toLowerCase());
   });
 
