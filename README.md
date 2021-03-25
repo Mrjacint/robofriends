@@ -1,8 +1,8 @@
-# robofriends
+# Robofriends
 
 Simple robot searching app created with **Create React App**
 
-## Install
+## Installation
 Clone this respository to your local machine then run
 ```
 npm install
@@ -13,7 +13,7 @@ npm start
 ```
 to run the app.
 
-##Technologies
+## Technologies
 
 * [React](https://reactjs.org/)
 * [Redux](https://redux.js.org/)
