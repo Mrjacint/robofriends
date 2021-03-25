@@ -24,3 +24,7 @@ to run the app.
 * [TypeScript](https://www.typescriptlang.org/)
 * [Jest](https://jestjs.io/)
 * [Enzyme](https://enzymejs.github.io/enzyme/)
+
+## APIs
+* [ROBOHASH](https://robohash.org)
+* [JSON Placeholder](https://jsonplaceholder.typicode.com/)
